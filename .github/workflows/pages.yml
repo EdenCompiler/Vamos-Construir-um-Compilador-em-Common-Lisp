@@ -10,6 +10,9 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -29,6 +32,9 @@ jobs:
 
       - name: Construir site
         run: sbcl --script build.lisp
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Enviar artifact do Pages
         uses: actions/upload-pages-artifact@v3
